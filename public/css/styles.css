@@ -1,0 +1,38 @@
+.main{
+    margin-top: 4rem;
+}
+.modal-main{
+    padding: 0.75rem;
+}
+.btn-acept{
+    background-color: #13C4A3;
+    font-size: 0.75rem;
+}
+
+.error{
+    size: 0.7rem;
+    color:#E87461;
+    margin-bottom: 0.3rem;
+}
+.btn-error{
+    background-color:#E87461;
+    font-size: 0.75rem;
+    margin-right: 0.7rem;
+}
+.color-pay{
+    height: 100%;
+    width: 4rem;
+    background-color: #06BCC1;
+}
+.card horizontal:hover,.card-image:hover .color-pay{
+    background-color: #05999e;
+}
+
+.btn-logout{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    color: white;
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css" />
+
+  <title>Pagos</title>
+</head>
+
+<body>
+  <script src="js/jquery-3.5.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src="https://kit.fontawesome.com/cef46d613e.js" crossorigin="anonymous"></script>
+  <script src="js/app.js"></script>
+
+  <nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo center"><i class="fas fa-coins"></i></a>
+      <ul class="right hide-on-med-and-down">
+        {{#if email}}
+        <li><a class="waves-effect" href="/alum">Alumnos</a></li>
+        <li><a class="waves-effect" href="/pag">Pagos</a></li>
+        <li><form action="/user/logout" method="POST"><button type="submit" class="btn-logout">Cerrar Sesion</button></form></li> 
+        {{/if}}
+      </ul>
+    </div>
+  </nav>

@@ -206,7 +206,7 @@ $(document).ready(function () {
             fecha = (data.fecha) ? data.fecha.split('T')[0] : null
 
             iFolio.val(data.referencia);
-            iAportacion.val(data.Aportacion.$numberDecimal);
+            iAportacion.val(data.aportacion.$numberDecimal);
             iFecha.val(fecha || "");
             createInitialChips([{ tag: data.nombre }]);
             setBrothers(data.alumno);

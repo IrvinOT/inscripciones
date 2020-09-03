@@ -147,7 +147,7 @@ $(document).ready(function () {
         var data = {
             alumno: _id,
             referencia: iFolio.val(),
-            Aportacion: iAportacion.val(),
+            aportacion: iAportacion.val(),
             fecha: iFecha.val()
         }
         return JSON.stringify(data);

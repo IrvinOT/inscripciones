@@ -21,6 +21,10 @@ const Pago = mongoose.model('Pago',new mongoose.Schema({
         type: Date,
         required: false
     },
+    nota:{
+        type:String,
+        required:false
+    }
 }));
 
 module.exports = Pago;

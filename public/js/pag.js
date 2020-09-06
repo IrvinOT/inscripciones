@@ -101,20 +101,36 @@ $(document).ready(function () {
                 return alumnoNombre
             }
         });
+        $('#modal1').modal('close');
         $.confirm({
             title: "Eliminar",
-            content: `Desea elimina el pago de ${nombre}`,
+            content: `<from class="col s12 formName">
+                        <div class="row">
+                            <div class="input-field col s5 ">
+                                <label>Desea elimina el pago de ${nombre}</label>
+                                <input placeholder="Razon" id="nota" type="text" class="validate " required/>
+                            </div>
+                        </div>
+                    </from>`,
             buttons: {
                 Eliminar: {
                     text: 'Eliminar',
                     btnClass: 'btn-error red',
                     action: () => {
                         remove(idPago);
+                        
                     }
                 },
                 cancelar: () => {
                     $('#modal1').modal('close');
                 }
+            },
+            onContentReady: function () {
+                var jc = this;
+                this.$content.find('form').on('submit', function (e) {
+                    e.preventDefault();
+                    jc.$$formSubmit.trigger('click');
+                });
             }
         });
     }
@@ -133,12 +149,15 @@ $(document).ready(function () {
 
     function remove(_id) {
         const url = `/pago/${_id}`;
+        const data = {nota:$('#nota').val()}
+        const jData = JSON.stringify(data)
         $.ajax({
-            type: 'DELETE',
+            type: 'PATCH',
+            data:jData,
             contentType: 'application/json',
             url,
             success: (res) => {
-                succesAction('eliminado');
+                succesAction('desabilitado');
             }
         });
     }

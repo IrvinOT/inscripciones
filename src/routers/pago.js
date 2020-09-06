@@ -52,7 +52,7 @@ router.patch('/pago/:id', async (req, res) => {
     const changes = req.body;
 
     const keys = Object.keys(changes);
-    const allowed = ["alumno", "referencia", "aportacion", "fecha"];
+    const allowed = ["alumno", "referencia", "aportacion", "fecha","nota"];
     const isValid = keys.every((key) => allowed.includes(key));
     try {
         if (!isValid) {
@@ -64,7 +64,7 @@ router.patch('/pago/:id', async (req, res) => {
             res.send(pago);
         }
     } catch (e) {
-        res.status(400).send(e);
+        res.status(500).send(e);
     }
 });
 

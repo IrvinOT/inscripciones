@@ -21,13 +21,27 @@
 
   <nav>
     <div class="nav-wrapper">
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger left"><i class="material-icons">menu</i></a>
       <a href="/" class="brand-logo center"><i class="fas fa-coins"></i></a>
       <ul class="right hide-on-med-and-down">
         {{#if email}}
         <li><a class="waves-effect" href="/alum">Alumnos</a></li>
         <li><a class="waves-effect" href="/pag">Pagos</a></li>
-        <li><form action="/user/logout" method="POST"><button type="submit" class="btn-logout">Cerrar Sesion</button></form></li> 
+        <li>
+          <form action="/user/logout" method="POST"><button type="submit" class="btn-logout">Cerrar Sesion</button>
+          </form>
+        </li>
         {{/if}}
       </ul>
     </div>
   </nav>
+  {{#if email}}
+  <ul class="sidenav" id="mobile-demo">
+    <li><a class="waves-effect" href="/alum">Alumnos</a></li>
+    <li><a class="waves-effect" href="/pag">Pagos</a></li>
+    <li>
+      <form action="/user/logout" method="POST"><button type="submit" class="btn-logout">Cerrar Sesion</button>
+      </form>
+    </li>
+  </ul>
+  {{/if}}

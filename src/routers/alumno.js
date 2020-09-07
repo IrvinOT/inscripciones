@@ -7,15 +7,11 @@ router.get('/alum', isLoggedIn, async (req, res) => {
 
     const students = await Alumno.find({});
     const email = req.user;
-    students.sort((a, b) => {
-        if (a.grupo > b.grupo)
-            return 1;
-        if (a.grupo < b.grupo)
-            return -1;
-        return 0;
-    });
-    res.render('alumno', { students, email });
+    const orderStudents = ordenPorGrupo(students);
+    res.render('alumno', { orderStudents, email });
 });
+
+
 
 router.get('/alumnos', async (req, res) => {
     try {
@@ -160,6 +156,17 @@ async function eliminarHermano(_id) {
     } catch (e) {
         return e
     }
+}
+
+function ordenPorGrupo(alumnos){
+    alumnos.sort((a, b) => {
+        if (a.grupo > b.grupo)
+            return 1;
+        if (a.grupo < b.grupo)
+            return -1;
+        return 0;
+    });
+    return alumnos
 }
 
 

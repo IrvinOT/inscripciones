@@ -10,6 +10,7 @@
                     <th>Referencia</th>
                     <th>Monto</th>
                     <th>Fecha</th>
+                    <th>nota</th>
                     <th><a id="addPay" class="waves-effect waves-light btn modal-trigger" href="#modal1"><i
                                 class="fas fa-plus-square"></i></a></th>
                 </thead>
@@ -19,12 +20,13 @@
                     <tr>
                         <td>{{nombre}}</td>
                         <td>{{referencia}}</td>
-                        {{#if nota}}
-                        <td>{{nota}}</td>
+                        {{#if razonEliminacion}}
+                        <td>{{razonEliminacion}}</td>
                         {{else}}          
                         <td>{{aportacion}}</td>
                          {{/if}}
                         <td class="date">{{fecha}}</td>
+                        <td>{{nota}}</td>
                         <td><a id="{{_id}}" class="waves-effect waves-light  modal-trigger edit" href="#modal1"><i
                                     class="fas fa-pen"></i></a></td>
                     </tr>

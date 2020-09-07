@@ -24,6 +24,10 @@ const Pago = mongoose.model('Pago',new mongoose.Schema({
     nota:{
         type:String,
         required:false
+    },
+    razonEliminacion:{
+        type: String,
+        required:false
     }
 }));
 

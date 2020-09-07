@@ -7,6 +7,13 @@ router.get('/alum', isLoggedIn, async (req, res) => {
 
     const students = await Alumno.find({});
     const email = req.user;
+    students.sort((a, b) => {
+        if (a.grupo > b.grupo)
+            return 1;
+        if (a.grupo < b.grupo)
+            return -1;
+        return 0;
+    });
     res.render('alumno', { students, email });
 });
 
@@ -148,7 +155,7 @@ async function eliminarHermano(_id) {
                 var compare = _id.toString().localeCompare(broId);
                 return compare !== 0
             });
-            await Alumno.findByIdAndUpdate(bro._id,{ hermano: newHermanos });
+            await Alumno.findByIdAndUpdate(bro._id, { hermano: newHermanos });
         });
     } catch (e) {
         return e

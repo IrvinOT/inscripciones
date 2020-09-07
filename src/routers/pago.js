@@ -52,7 +52,7 @@ router.patch('/pago/:id', async (req, res) => {
     const changes = req.body;
 
     const keys = Object.keys(changes);
-    const allowed = ["alumno", "referencia", "aportacion", "fecha","nota"];
+    const allowed = ["alumno", "referencia", "aportacion", "fecha","nota","razonEliminacion"];
     const isValid = keys.every((key) => allowed.includes(key));
     try {
         if (!isValid) {

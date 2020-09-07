@@ -11,6 +11,7 @@ $(document).ready(function () {
     const iFolio = $('#folio');
     const iAportacion = $('#aportacion');
     const iFecha = $('#fecha');
+    const iNota = $('#nota');
     const bAgregar = $('#btnAgregar');
     const bAddPay = $('#addPay');
     const bDelete = $('#btnDelete');
@@ -167,7 +168,8 @@ $(document).ready(function () {
             alumno: _id,
             referencia: iFolio.val(),
             aportacion: iAportacion.val(),
-            fecha: iFecha.val()
+            fecha: iFecha.val(),
+            nota: iNota.val()
         }
         return JSON.stringify(data);
     }

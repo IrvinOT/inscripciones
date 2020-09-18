@@ -9,6 +9,9 @@ const Pago = mongoose.model('Pago',new mongoose.Schema({
     nombre:{
         type:String
     },
+    grupo:{
+        type:String
+    },
     referencia: {
         type: String,
         required: true,

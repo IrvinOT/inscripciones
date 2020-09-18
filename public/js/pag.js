@@ -108,8 +108,8 @@ $(document).ready(function () {
             content: `<from class="col s12 formName">
                         <div class="row">
                             <div class="input-field col s5 ">
-                                <label>Desea elimina el pago de ${nombre}</label>
-                                <input placeholder="Razon" id="nota" type="text" class="validate " required/>
+                                <p>Desea elimina el pago de ${nombre}</p>
+                                <input placeholder="Razon" id="razonEliminacion" type="text" class="validate " required/>
                             </div>
                         </div>
                     </from>`,
@@ -119,7 +119,6 @@ $(document).ready(function () {
                     btnClass: 'btn-error red',
                     action: () => {
                         remove(idPago);
-                        
                     }
                 },
                 cancelar: () => {
@@ -150,7 +149,7 @@ $(document).ready(function () {
 
     function remove(_id) {
         const url = `/pago/${_id}`;
-        const data = {nota:$('#nota').val()}
+        const data = {razonEliminacion:$('#razonEliminacion').val()}
         const jData = JSON.stringify(data)
         $.ajax({
             type: 'PATCH',

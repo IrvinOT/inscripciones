@@ -2,12 +2,13 @@ const express = require('express');
 const Pago = require('../models/pago');
 const Alumno = require('../models/alumno');
 const { isLoggedIn } = require('../middleware/check-aut');
+const { findById } = require('../models/pago');
 const router = new express.Router();
 
-router.get('/pag',isLoggedIn,async (req, res) => {
+router.get('/pag', isLoggedIn, async (req, res) => {
     const pays = await Pago.find({});
     const email = req.user;
-    res.render('pago', { pays,email });
+    res.render('pago', { pays, email });
 });
 
 router.get('/pagos', async (req, res) => {
@@ -24,6 +25,7 @@ router.post('/pago', async (req, res) => {
         const _id = req.body.alumno;
         const alumno = await Alumno.findById(_id);
         req.body.nombre = alumno.nombre + ' ' + alumno.a_Paterno + ' ' + alumno.a_Materno;
+        req.body.grupo = alumno.grupo;
         const pago = new Pago(req.body);
 
         await pago.save();
@@ -52,16 +54,25 @@ router.patch('/pago/:id', async (req, res) => {
     const changes = req.body;
 
     const keys = Object.keys(changes);
-    const allowed = ["alumno", "referencia", "aportacion", "fecha","nota","razonEliminacion"];
+    const allowed = ["alumno", "referencia", "aportacion", "fecha", "nota", "razonEliminacion"];
     const isValid = keys.every((key) => allowed.includes(key));
     try {
         if (!isValid) {
             res.status(400).send({ error: "Invalid update" });
         } else {
-            const pago = await Pago.findByIdAndUpdate(_id, changes, { new: true, runValidators: true });
-            if (!pago)
+            const exist = await Pago.findById(_id);
+            if (exist) {
+                const alumno = await Alumno.findById(exist.alumno);
+                if (alumno) {
+                    changes.nombre = alumno.nombre + ' ' + alumno.a_Paterno + ' ' + alumno.a_Materno;;
+                    changes.grupo = alumno.grupo;
+                }
+                const pago = await Pago.findByIdAndUpdate(_id, changes, { new: true, runValidators: true });
+                res.send(pago);
+            } else {
                 return res.status(404).send();
-            res.send(pago);
+            }
+
         }
     } catch (e) {
         res.status(500).send(e);
@@ -74,10 +85,10 @@ router.get('/pago/hermanos/:id&:ref', async (req, res) => {
         referencia: req.params.ref
     };
     try {
-            const pago = await Pago.find(search);
-            if (!pago)
-                return res.status(404).send();
-            res.send(pago);
+        const pago = await Pago.find(search);
+        if (!pago)
+            return res.status(404).send();
+        res.send(pago);
     } catch (e) {
         res.status(400).send(e);
     }

@@ -6,8 +6,8 @@ $(document).ready(function () {
     const iNombre = $('#nombre');
     const iPaterno = $('#aPaterno');
     const iMaterno = $('#aMaterno');
-    const iFechaNacimiento = $('#fechaNacimiento');
-    const iTutor = $('#tutor');
+    // const iFechaNacimiento = $('#fechaNacimiento');
+    // const iTutor = $('#tutor');
     const iGrupo = $('#grupo');
     const bAgregar = $('#btnAgregar');
     const bAddAlum = $('#addAlum');
@@ -133,8 +133,8 @@ $(document).ready(function () {
             nombre: iNombre.val(),
             a_Paterno: iPaterno.val(),
             a_Materno: iMaterno.val(),
-            fecha_Nacimiento: iFechaNacimiento.val(),
-            tutor: [iTutor.val()],
+            // fecha_Nacimiento: iFechaNacimiento.val(),
+            // tutor: [iTutor.val()],
             hermano: getBrothers(),
             grupo: iGrupo.val()
         }
@@ -160,8 +160,8 @@ $(document).ready(function () {
             iNombre.val(data.nombre);
             iPaterno.val(data.a_Paterno);
             iMaterno.val(data.a_Materno);
-            iFechaNacimiento.val(fechaNacimiento || "");
-            iTutor.val(data.tutor[0] || "");
+            // iFechaNacimiento.val(fechaNacimiento || "");
+            // iTutor.val(data.tutor[0] || "");
             iGrupo.val(data.grupo || "");
 
             createChips(hermanos);

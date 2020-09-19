@@ -13,7 +13,7 @@ const Alumno = mongoose.model('Alumno', new mongoose.Schema({
     },
     a_Materno:{
         type:String,
-        required:true,
+        required:false,
         trim:true
     },
     rfc :{

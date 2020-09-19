@@ -16,7 +16,8 @@ function initAlumnos() {
             if (data.error)
                 return data.error;
             data.forEach(alumno => {
-                name = alumno.nombre+' '+alumno.a_Paterno+' '+alumno.a_Materno
+                name = alumno.nombre+' '+alumno.a_Paterno+' '+alumno.a_Materno;
+                name = name.trim()
                 jAlumnos[name] = null;
                 students[alumno._id] = name;
             });

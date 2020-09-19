@@ -24,6 +24,10 @@ const Pago = mongoose.model('Pago',new mongoose.Schema({
         type: Date,
         required: false
     },
+    log:{
+        type:Date,
+        required:true
+    },
     nota:{
         type:String,
         required:false

@@ -56,7 +56,8 @@ $(document).ready(function () {
             url: '/alumno',
             success: (data) => {
                 succesAction('registrado');
-            }
+            },
+            er
         });
     }
 

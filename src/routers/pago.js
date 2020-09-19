@@ -6,7 +6,7 @@ const { findById } = require('../models/pago');
 const router = new express.Router();
 
 router.get('/pag', isLoggedIn, async (req, res) => {
-    const pays = await Pago.find({});
+    const pays =ordenPorGrupo(await Pago.find({}));
     const email = req.user;
     res.render('pago', { pays, email });
 });
@@ -22,12 +22,17 @@ router.get('/pagos', async (req, res) => {
 
 router.post('/pago', async (req, res) => {
     try {
-        const _id = req.body.alumno;
+        const data = req.body;
+        const _id = data.alumno;
+        if(await existPay(_id,data.referencia))
+            return res.status(226).send({message:"Ya existe ese Alumno con esa referencia"});
+        
         const alumno = await Alumno.findById(_id);
-        req.body.nombre = alumno.nombre + ' ' + alumno.a_Paterno + ' ' + alumno.a_Materno;
-        req.body.grupo = alumno.grupo;
-        const pago = new Pago(req.body);
-
+        data.nombre = alumno.nombre + ' ' + alumno.a_Paterno + ' ' + alumno.a_Materno;
+        data.grupo = alumno.grupo;
+        data.log = new Date();
+        
+        const pago = new Pago(data);
         await pago.save();
         res.status(201).send(pago);
     } catch (e) {
@@ -107,6 +112,30 @@ router.delete('/pago/:id', async (req, res) => {
     }
 });
 
+async function existPay(idAlumno,referencia){
+   try{
+     const search = {alumno:idAlumno,referencia};
+      const pay = await Pago.find(search);
+      if (pay.length > 0)
+        return true;
+
+    return false;
+   }catch(e){
+       console.log(e);
+   }
+}
+
+
+function ordenPorGrupo(pagos){
+    pagos.sort((a, b) => {
+        if (a.grupo > b.grupo)
+            return 1;
+        if (a.grupo < b.grupo)
+            return -1;
+        return 0;
+    });
+    return pagos
+}
 
 
 
